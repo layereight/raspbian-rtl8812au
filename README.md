@@ -8,3 +8,7 @@
 
 * [https://github.com/notro/rpi-source/wiki](https://github.com/notro/rpi-source/wiki)
 * [https://github.com/gnab/rtl8812au](https://github.com/gnab/rtl8812au)
+
+## Todo
+
+* optimize runtime
