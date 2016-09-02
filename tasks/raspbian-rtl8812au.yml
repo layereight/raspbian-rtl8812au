@@ -1,0 +1,72 @@
+---
+
+  #
+  # compile rtl8812au wifi driver for raspbian
+  #
+  # https://github.com/notro/rpi-source/wiki
+  # https://github.com/gnab/rtl8812au
+  #
+  - name: Install necessary packages
+    apt:
+      name: "{{ item }}"
+      state: latest
+      update_cache: yes
+    with_items:
+      - git
+      - bc
+
+  - name: Download rpi-source
+    get_url:
+      url: "https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source"
+      dest: "/usr/bin/rpi-source"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Run rpi-source to download current raspbian kernel source
+    command: rpi-source
+    register: rpi_result
+    failed_when: "rpi_result.rc > 1"
+    become: no
+
+  - name: Clone git repo for rtl8812au wifi driver
+    git:
+      clone: yes
+      update: no
+      repo: "https://github.com/gnab/rtl8812au"
+      dest: "{{ ansible_env.HOME }}/rtl8812au"
+
+  - name: Disable CONFIG_PLATFORM_I386_PC in Makefile
+    lineinfile:
+      dest: "{{ ansible_env.HOME }}/rtl8812au/Makefile"
+      regexp: "^CONFIG_PLATFORM_I386_PC"
+      line: "CONFIG_PLATFORM_I386_PC = n"
+      state: present
+      backrefs: yes
+      backup: yes
+
+  - name: Enable CONFIG_PLATFORM_ARM_RPI in Makefile
+    lineinfile:
+      dest: "{{ ansible_env.HOME }}/rtl8812au/Makefile"
+      regexp: "^CONFIG_PLATFORM_ARM_RPI"
+      line: "CONFIG_PLATFORM_ARM_RPI = y"
+      state: present
+      backrefs: yes
+      backup: yes
+
+  - name: Make the rtl8812au wifi driver
+    make:
+      chdir: "{{ ansible_env.HOME }}/rtl8812au"
+
+  - name: Copy compiled 8812au.ko module to kernel modules
+    copy:
+      src: "{{ ansible_env.HOME }}/rtl8812au/8812au.ko"
+      dest: "/lib/modules/{{ ansible_kernel }}/kernel/drivers/net/wireless"
+      remote_src: yes
+
+  - name: Run depmod
+    command: depmod
+
+  - name: Modprobe 8812au.ko
+    modprobe:
+      name: 8812au
