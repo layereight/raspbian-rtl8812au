@@ -10,7 +10,3 @@
 * [https://github.com/notro/rpi-source/wiki](https://github.com/notro/rpi-source/wiki)
 * [https://github.com/gnab/rtl8812au](https://github.com/gnab/rtl8812au)
 * [Compiling the rtl8812au Wifi Driver for Raspbian](https://layereight.de/raspberry-pi/2016/08/25/raspbian-rtl8812au.html)
-
-## Todo
-
-* review permissions needed for every task

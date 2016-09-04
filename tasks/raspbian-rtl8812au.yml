@@ -7,6 +7,7 @@
   # https://github.com/gnab/rtl8812au
   #
   - name: Install necessary packages
+    become: yes
     apt:
       name: "{{ item }}"
       state: latest
@@ -16,6 +17,7 @@
       - bc
 
   - name: Download rpi-source
+    become: yes
     get_url:
       url: "https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source"
       dest: "/usr/bin/rpi-source"
@@ -23,22 +25,25 @@
       group: root
       mode: 0755
 
+  # TODO: make idempotent
   - name: Run rpi-source to download current raspbian kernel source
+    become: no
     command: rpi-source
     register: rpi_result
     failed_when: "rpi_result.rc > 1"
-    become: no
 
   - name: Clone git repo for rtl8812au wifi driver
+    become: no
     git:
       clone: yes
       update: no
       repo: "https://github.com/gnab/rtl8812au"
-      dest: "{{ ansible_env.HOME }}/rtl8812au"
+      dest: "/tmp/rtl8812au"
 
   - name: Disable CONFIG_PLATFORM_I386_PC in Makefile
+    become: no
     lineinfile:
-      dest: "{{ ansible_env.HOME }}/rtl8812au/Makefile"
+      dest: "/tmp/rtl8812au/Makefile"
       regexp: "^CONFIG_PLATFORM_I386_PC"
       line: "CONFIG_PLATFORM_I386_PC = n"
       state: present
@@ -46,8 +51,9 @@
       backup: yes
 
   - name: Enable CONFIG_PLATFORM_ARM_RPI in Makefile
+    become: no
     lineinfile:
-      dest: "{{ ansible_env.HOME }}/rtl8812au/Makefile"
+      dest: "/tmp/rtl8812au/Makefile"
       regexp: "^CONFIG_PLATFORM_ARM_RPI"
       line: "CONFIG_PLATFORM_ARM_RPI = y"
       state: present
@@ -55,18 +61,22 @@
       backup: yes
 
   - name: Make the rtl8812au wifi driver
+    become: no
     make:
-      chdir: "{{ ansible_env.HOME }}/rtl8812au"
+      chdir: "/tmp/rtl8812au"
 
   - name: Copy compiled 8812au.ko module to kernel modules
+    become: yes
     copy:
-      src: "{{ ansible_env.HOME }}/rtl8812au/8812au.ko"
+      src: "/tmp/rtl8812au/8812au.ko"
       dest: "/lib/modules/{{ ansible_kernel }}/kernel/drivers/net/wireless"
       remote_src: yes
 
   - name: Run depmod
-    command: depmod
+    become: yes
+    command: depmod -a
 
   - name: Modprobe 8812au.ko
+    become: yes
     modprobe:
       name: 8812au
