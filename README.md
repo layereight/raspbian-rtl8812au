@@ -15,9 +15,9 @@
 
 * execute `ansible-galaxy install -r requirements.yml`
 * contents of requirements.yml:
-  ```
+```
   - name: raspbian-rtl8812au
     src: https://github.com/layereight/raspbian-rtl8812au
     version: "1.2"
-  ```
+```
 * also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html)
