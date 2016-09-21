@@ -10,3 +10,14 @@
 * [https://github.com/notro/rpi-source/wiki](https://github.com/notro/rpi-source/wiki)
 * [https://github.com/gnab/rtl8812au](https://github.com/gnab/rtl8812au)
 * [Compiling the rtl8812au Wifi Driver for Raspbian](https://layereight.de/raspberry-pi/2016/08/25/raspbian-rtl8812au.html)
+
+## Install the role via Ansible Galaxy
+
+* execute `ansible-galaxy install -r requirements.yml`
+* contents of requirements.yml:
+  ```
+  - name: raspbian-rtl8812au
+    src: https://github.com/layereight/raspbian-rtl8812au
+    version: "1.2"
+  ```
+* also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html)
