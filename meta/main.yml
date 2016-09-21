@@ -1,0 +1,5 @@
+---
+
+galaxy_info:
+  author: https://github.com/layereight/
+  description: an Ansible role for compiling the rtl8812au wifi driver for raspbian on the Raspberry Pi
