@@ -5,7 +5,7 @@
 [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
   * Raspbian Jessie release 2016-05-27 using kernel version 4.4.11-v7+
   * Raspbian Jessie release 2016-09-23 using kernel version 4.4.21-v7+
-* should be run with sudo permissions
+* some tasks require sudo permissions
 
 ## Read on
 
