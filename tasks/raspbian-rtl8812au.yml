@@ -11,25 +11,36 @@
     apt:
       name: "{{ item }}"
       state: latest
-      update_cache: yes
     with_items:
       - git
       - bc
 
+  #
+  # We can't use {{ ansible_env.HOME }} when the whole role is run with sudo permissions
+  # since {{ ansible_env.HOME }} will typically point to "/root" then.
+  #
+  - name: Determine ansible_user's home directory
+    become: no
+    command: "echo $HOME"
+    register: raspbian_rtl8812au_home_raw
+    changed_when: false
+
+  - name: Register ansible_user's home directory {{ raspbian_rtl8812au_home_raw.stdout }} as variable
+    set_fact:
+      raspbian_rtl8812au_home: "{{ raspbian_rtl8812au_home_raw.stdout }}"
+
   - name: Download rpi-source
-    become: yes
+    become: no
     get_url:
       url: "https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source"
-      dest: "/usr/bin/rpi-source"
-      owner: root
-      group: root
+      dest: "{{ raspbian_rtl8812au_home }}/rpi-source"
       mode: 0755
 
-  # TODO: make idempotent
   - name: Run rpi-source to download current raspbian kernel source
     become: no
-    command: rpi-source
+    command: "{{ raspbian_rtl8812au_home }}/rpi-source"
     register: rpi_result
+    changed_when: "rpi_result.rc == 0"
     failed_when: "rpi_result.rc > 1"
 
   - name: Clone git repo for rtl8812au wifi driver
@@ -38,12 +49,12 @@
       clone: yes
       update: no
       repo: "https://github.com/gnab/rtl8812au"
-      dest: "/tmp/rtl8812au"
+      dest: "{{ raspbian_rtl8812au_home }}/rtl8812au"
 
   - name: Disable CONFIG_PLATFORM_I386_PC in Makefile
     become: no
     lineinfile:
-      dest: "/tmp/rtl8812au/Makefile"
+      dest: "{{ raspbian_rtl8812au_home }}/rtl8812au/Makefile"
       regexp: "^CONFIG_PLATFORM_I386_PC"
       line: "CONFIG_PLATFORM_I386_PC = n"
       state: present
@@ -53,7 +64,7 @@
   - name: Enable CONFIG_PLATFORM_ARM_RPI in Makefile
     become: no
     lineinfile:
-      dest: "/tmp/rtl8812au/Makefile"
+      dest: "{{ raspbian_rtl8812au_home }}/rtl8812au/Makefile"
       regexp: "^CONFIG_PLATFORM_ARM_RPI"
       line: "CONFIG_PLATFORM_ARM_RPI = y"
       state: present
@@ -63,18 +74,20 @@
   - name: Make the rtl8812au wifi driver
     become: no
     make:
-      chdir: "/tmp/rtl8812au"
+      chdir: "{{ raspbian_rtl8812au_home }}/rtl8812au"
+    changed_when: false
 
   - name: Copy compiled 8812au.ko module to kernel modules
     become: yes
     copy:
-      src: "/tmp/rtl8812au/8812au.ko"
+      src: "{{ raspbian_rtl8812au_home }}/rtl8812au/8812au.ko"
       dest: "/lib/modules/{{ ansible_kernel }}/kernel/drivers/net/wireless"
       remote_src: yes
 
   - name: Run depmod
     become: yes
     command: depmod -a
+    changed_when: false
 
   - name: Modprobe 8812au.ko
     become: yes
