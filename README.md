@@ -2,9 +2,11 @@
 
 * an Ansible role for compiling the rtl8812au wifi driver for raspbian on the Raspberry Pi
 * has been tested with Raspbian on a 
-[Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+[Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/) and 
+[Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/)
   * Raspbian Jessie release 2016-05-27 using kernel version 4.4.11-v7+
   * Raspbian Jessie release 2016-09-23 using kernel version 4.4.21-v7+
+  * Raspbian Jessie release 2017-01-11 using kernel version 4.4.34-v7+
 * some tasks require sudo permissions
 
 ## Read on
