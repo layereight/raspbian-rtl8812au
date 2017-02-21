@@ -22,6 +22,6 @@
 ```
   - name: raspbian-rtl8812au
     src: https://github.com/layereight/raspbian-rtl8812au
-    version: "1.2"
+    version: "1.3"
 ```
 * also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html)
