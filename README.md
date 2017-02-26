@@ -17,9 +17,12 @@
 
 ## Install the role via Ansible Galaxy
 
-* execute `ansible-galaxy install -r requirements.yml`
-* contents of requirements.yml:
+Typical run:
+```sh
+$ ansible-galaxy install -r requirements.yml
 ```
+*requirements.yml*
+```YAML
   - name: raspbian-rtl8812au
     src: https://github.com/layereight/raspbian-rtl8812au
     version: "1.3"
