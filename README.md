@@ -43,7 +43,7 @@ $ ansible-playbook -i inventory rtl8812au.yml
 *inventory*
 ```INI
 [raspberrypi]
-pizero ansible_host=192.168.0.101 ansible_user=pi ansible_ssh_pass=raspberry 
+mypi ansible_host=192.168.0.101 ansible_user=pi ansible_ssh_pass=raspberry 
 ```
 
 *rtl8812au.yml*
