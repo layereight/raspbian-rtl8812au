@@ -19,19 +19,25 @@
 
 Typical run:
 ```sh
+$ ansible-galaxy install layereight.raspbian-rtl8812au
+```
+
+If you want to install a specific version in a collection with other roles using a role file:
+```sh
 $ ansible-galaxy install -r roles.yml
 ```
 *roles.yml*
 ```YAML
-  - name: raspbian-rtl8812au
-    src: https://github.com/layereight/raspbian-rtl8812au
-    version: "1.3"
+- name: layereight.raspbian-rtl8812au
+  src: layereight.raspbian-rtl8812au
+  version: "1.3"
 ```
-* also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html)
+* also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html) and the 
+[Ansible Galaxy introduction](https://galaxy.ansible.com/intro)
 
 ## Role Variables
 
-None
+No variables needed.
 
 ## Example Playbook
 
