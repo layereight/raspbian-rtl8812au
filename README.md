@@ -12,7 +12,7 @@
 ## Requirements
 
 * Raspberry Pi with Raspbian OS
-* network access to the Raspberry Pi and sshd enabled
+* network access to the Raspberry Pi and [sshd enabled](https://layereight.de/raspberry-pi/2017/02/28/ssh-headless-Raspberry-Pi.html)
 * a user with sudo permissions
 
 ## Install the role via Ansible Galaxy
