@@ -38,7 +38,7 @@
 
   - name: Run rpi-source to download current raspbian kernel source
     become: no
-    command: "{{ raspbian_rtl8812au_home }}/rpi-source"
+    command: "{{ raspbian_rtl8812au_home }}/rpi-source --skip-gcc"
     register: rpi_result
     changed_when: "rpi_result.rc == 0"
     failed_when: "rpi_result.rc > 1"
