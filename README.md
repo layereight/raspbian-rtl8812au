@@ -8,6 +8,7 @@
   * Raspbian Jessie release 2016-09-23 using kernel version 4.4.21-v7+
   * Raspbian Jessie release 2017-01-11 using kernel version 4.4.34-v7+
   * Raspbian Jessie release 2017-04-10 using kernel version 4.4.50-v7+
+  * Raspbian Stretch release 2017-09-07 using kernel version 4.9.41-v7+
 
 ## Requirements
 
@@ -30,7 +31,7 @@ $ ansible-galaxy install -r roles.yml
 ```YAML
 - name: layereight.raspbian-rtl8812au
   src: layereight.raspbian-rtl8812au
-  version: "1.3"
+  version: "1.4"
 ```
 * also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html) and the 
 [Ansible Galaxy introduction](https://galaxy.ansible.com/intro)
