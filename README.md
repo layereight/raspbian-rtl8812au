@@ -9,6 +9,7 @@
   * Raspbian Jessie release 2017-01-11 using kernel version 4.4.34-v7+
   * Raspbian Jessie release 2017-04-10 using kernel version 4.4.50-v7+
   * Raspbian Stretch release 2017-09-07 using kernel version 4.9.41-v7+
+  * Raspbian Stretch release 2017-11-29 using kernel version 4.9.59-v7+
 
 ## Requirements
 
