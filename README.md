@@ -1,6 +1,9 @@
 # raspbian-rtl8812au
 
 * an Ansible role for compiling the rtl8812au wifi driver for raspbian on the Raspberry Pi
+* the chipset is used in wifi USB dongles like the
+[D-Link DWA-171](http://us.dlink.com/products/connect/wireless-ac-dual-band-usb-adapter/) or the
+[Edimax EW-7811UTC](http://us.edimax.com/edimax/merchandise/merchandise_detail/data/edimax/us/wireless_adapters_ac600_dual-band/ew-7811utc/)
 * has been tested with Raspbian on a 
 [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/) and 
 [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/)
@@ -10,6 +13,7 @@
   * Raspbian Jessie release 2017-04-10 using kernel version 4.4.50-v7+
   * Raspbian Stretch release 2017-09-07 using kernel version 4.9.41-v7+
   * Raspbian Stretch release 2017-11-29 using kernel version 4.9.59-v7+
+  * Raspbian Stretch (9.4) release 2018-06-27 using kernel version 4.14.50-v7+
 
 ## Requirements
 
