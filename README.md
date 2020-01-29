@@ -1,4 +1,4 @@
-# raspbian-rtl8812au
+# raspbian-rtl8812au [![Build Status](https://travis-ci.org/layereight/raspbian-rtl8812au.svg?branch=master)](https://travis-ci.org/layereight/raspbian-rtl8812au)
 
 * an Ansible role for compiling the rtl8812au wifi driver for raspbian on the Raspberry Pi
 * the chipset is used in wifi USB dongles like the
