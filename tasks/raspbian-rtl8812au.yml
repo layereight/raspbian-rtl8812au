@@ -9,11 +9,15 @@
   - name: Install necessary packages
     become: yes
     apt:
-      name: "{{ item }}"
-      state: latest
-    with_items:
-      - git
-      - bc
+      name:
+        - git
+        - bc
+        - bison
+        - flex
+        - libssl-dev
+      state: present
+      update_cache: yes
+      cache_valid_time: 86400 # 1 day
 
   #
   # We can't use {{ ansible_env.HOME }} when the whole role is run with sudo permissions
