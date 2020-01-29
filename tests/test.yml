@@ -1,0 +1,8 @@
+---
+
+  - name: Testing the "layereight.raspbian-rtl8812au" Ansible role
+    hosts: localhost
+    connection: local
+
+    roles:
+      - raspbian-rtl8812au
