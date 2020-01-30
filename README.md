@@ -14,6 +14,7 @@
   * Raspbian Stretch release 2017-09-07 using kernel version 4.9.41-v7+
   * Raspbian Stretch release 2017-11-29 using kernel version 4.9.59-v7+
   * Raspbian Stretch (9.4) release 2018-06-27 using kernel version 4.14.50-v7+
+  * Raspbian Buster (10) release 2019-09-26 using kernel version 4.19.93-v7+
 
 ## Requirements
 
