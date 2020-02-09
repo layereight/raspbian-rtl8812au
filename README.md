@@ -37,7 +37,7 @@ $ ansible-galaxy install -r roles.yml
 ```YAML
 - name: layereight.raspbian-rtl8812au
   src: layereight.raspbian-rtl8812au
-  version: "1.4"
+  version: "1.4.1"
 ```
 * also see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/galaxy.html) and the 
 [Ansible Galaxy introduction](https://galaxy.ansible.com/intro)
